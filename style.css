@@ -1,4 +1,16 @@
-/* General Styling */
+/* --- CSS Variables and General Styling --- */
+:root {
+    --primary-start: #6a11cb;
+    --primary-end: #2575fc;
+    --accent-color: #34e89e;
+    --background-gradient: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    --text-dark: #333;
+    --text-light: #fff;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --font-family: 'Poppins', sans-serif;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,116 +18,175 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
+    font-family: var(--font-family);
+    background-image: var(--background-gradient);
     display: flex;
     flex-direction: column;
     height: 100vh;
-    color: #333;
+    color: var(--text-dark);
 }
 
-/* Navbar */
+/* --- Navbar --- */
 .navbar {
-    background-color: #4A90E2;
-    color: white;
+    background: linear-gradient(90deg, var(--primary-start) 0%, var(--primary-end) 100%);
+    color: var(--text-light);
     padding: 1rem 1.5rem;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--accent-color);
+}
+.navbar h1 { font-weight: 600; }
+.nav-button {
+    background: var(--text-light);
+    color: var(--primary-end);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.navbar h1 {
-    margin-bottom: 0.25rem;
-}
-
-/* Chat Container */
+/* --- Chat Container --- */
 .chat-container {
-    flex-grow: 1; /* Takes up all available vertical space */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden; /* Prevents children from spilling out */
+    width: 95%;
+    margin: 1rem auto;
+    overflow: hidden;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(4px);
 }
-
 #chat-messages {
     flex-grow: 1;
-    overflow-y: auto; /* Enables scrolling for messages */
+    overflow-y: auto;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-/* Individual Messages */
+/* Chat Bubbles */
 .message {
-    max-width: 80%;
-    padding: 0.75rem 1rem;
-    border-radius: 18px;
-    line-height: 1.5;
+    max-width: 85%;
+    padding: 0.75rem 1.25rem;
+    border-radius: 24px;
+    line-height: 1.6;
     word-wrap: break-word;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    animation: popIn 0.3s ease-out;
 }
+@keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
 .user-message {
-    background-color: #4A90E2;
-    color: white;
-    align-self: flex-end; /* Aligns user messages to the right */
-    border-bottom-right-radius: 4px;
+    background: linear-gradient(90deg, var(--primary-start) 0%, var(--primary-end) 100%);
+    color: var(--text-light);
+    align-self: flex-end;
+    border-bottom-right-radius: 6px;
 }
-
 .bot-message {
-    background-color: #e9e9eb;
-    color: #333;
-    align-self: flex-start; /* Aligns bot messages to the left */
-    border-bottom-left-radius: 4px;
+    background: #e9e9eb;
+    color: var(--text-dark);
+    align-self: flex-start;
+    border-bottom-left-radius: 6px;
 }
 
-/* Loading Indicator */
-.bot-message.loading p::after {
-    content: '...';
-    display: inline-block;
-    animation: dots 1.5s infinite;
-}
-
-@keyframes dots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60%, 100% { content: '...'; }
-}
-
-/* Input Form */
+/* Chat Input Form */
 #chat-form {
     display: flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 1rem;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.7);
     border-top: 1px solid #ddd;
 }
-
 #user-input {
     flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 50px;
+    padding: 0.85rem 1.25rem;
     font-size: 1rem;
-    margin-right: 0.5rem;
+    font-family: var(--font-family);
+    background-color: #f0f2f5;
+    transition: box-shadow 0.3s ease;
 }
-
 #user-input:focus {
     outline: none;
-    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px var(--primary-end);
 }
 
+/* New Send Button Style */
 #chat-form button {
-    background-color: #4A90E2;
-    color: white;
+    background: linear-gradient(90deg, var(--primary-start) 0%, var(--primary-end) 100%);
+    color: var(--text-light);
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 20px;
-    font-size: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
-
 #chat-form button:hover {
-    background-color: #357ABD;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+#chat-form button svg { width: 24px; height: 24px; }
+
+/* --- Styles for Quiz Page --- */
+.quiz-container {
+    max-width: 800px; width: 95%; margin: 2rem auto; padding: 2rem;
+    background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow);
+}
+.hidden { display: none !important; }
+
+#quiz-setup h2, #quiz-results h2 { text-align: center; margin-bottom: 2rem; font-weight: 600; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+.form-group input {
+    width: 100%; padding: 0.85rem; border: 2px solid #ccc; border-radius: 8px; font-family: var(--font-family); font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus { outline: none; border-color: var(--primary-end); box-shadow: 0 0 0 3px var(--primary-end); }
+
+/* General Quiz Buttons */
+.quiz-btn {
+    width: 100%; padding: 0.85rem; font-size: 1.1rem; font-family: var(--font-family);
+    color: var(--text-light); border: none; border-radius: 8px; cursor: pointer;
+    text-decoration: none; display: inline-block; text-align: center;
+    transition: all 0.3s ease;
+}
+.quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.quiz-btn.primary { background: linear-gradient(90deg, var(--primary-start) 0%, var(--primary-end) 100%); }
+.quiz-btn.success { background-color: #28a745; }
+.quiz-btn.danger { background-color: #e74c3c; width: auto; padding: 0.5rem 1rem; font-size: 1rem; }
+.quiz-btn:disabled { background: #aaa; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Quiz Taker */
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 1.1rem; }
+#question-text { margin-bottom: 2rem; font-size: 1.4rem; font-weight: 600; line-height: 1.5; }
+#options-container { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.option-btn {
+    padding: 0.85rem; text-align: left; background-color: #fff; border: 2px solid #ddd;
+    border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.2s ease;
+}
+.option-btn:not([disabled]):hover { border-color: var(--primary-end); background-color: #f0f8ff; }
+.option-btn.correct { border-color: #28a745; background-color: #d4edda; font-weight: bold; }
+.option-btn.incorrect { border-color: #dc3545; background-color: #f8d7da; }
+
+#quiz-results { text-align: center; }
+#final-score { font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem; }
