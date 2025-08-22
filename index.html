@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyBot AI</title>
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="navbar">
-        <h1>StudyBot AI</h1>
-        <p>Your expert tutor for Math, Science, English, & CS</p>
+        <div class="navbar-content">
+            <h1>StudyBot AI ✨</h1>
+            <p>Your expert tutor for Math, Science, English, & CS</p>
+        </div>
+        <a href="quiz.html" class="nav-button">Practice Quiz</a>
     </header>
 
     <main class="chat-container">
         <div id="chat-messages">
-            <!-- Chat messages will be dynamically added here -->
             <div class="message bot-message">
                 <p>Hello! I'm StudyBot. How can I help you with your studies today?</p>
             </div>
@@ -25,15 +32,19 @@
             <input 
                 type="text" 
                 id="user-input" 
-                placeholder="Ask about Math, Science, English..."
+                placeholder="Ask me anything..."
                 autocomplete="off"
                 required
             >
-            <button type="submit">Send</button>
+            <!-- Updated Button with SVG Icon -->
+            <button type="submit" aria-label="Send Message">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                </svg>
+            </button>
         </form>
     </main>
     
-    <!-- This script tag is important! `type="module"` is required. -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
